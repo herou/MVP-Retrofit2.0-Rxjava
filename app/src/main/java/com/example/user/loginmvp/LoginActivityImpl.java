@@ -1,10 +1,13 @@
 package com.example.user.loginmvp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class LoginActivityImpl extends AppCompatActivity implements Login{
@@ -12,8 +15,8 @@ public class LoginActivityImpl extends AppCompatActivity implements Login{
     EditText username;
     EditText password;
     Button login;
-
     LoginPresenterImpl loginPresenterImpl;
+    ProgressBar loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,15 @@ public class LoginActivityImpl extends AppCompatActivity implements Login{
         loginPresenterImpl = new LoginPresenterImpl(this);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        loading = (ProgressBar) findViewById(R.id.loading);
         login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginPresenterImpl.validateCred(username.getText().toString(),password.getText().toString());
+            }
+        });
+
 
     }
 
@@ -47,7 +58,7 @@ public class LoginActivityImpl extends AppCompatActivity implements Login{
         Toast.makeText(getApplicationContext(),"Happend and error,try again later!",Toast.LENGTH_LONG).show();
     }
 
-    @Override
+    /*@Override
     public void login(View view) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,4 +67,15 @@ public class LoginActivityImpl extends AppCompatActivity implements Login{
             }
         });
     }
+*/
+    @Override
+    public void showProgressDialog() {
+        loading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void dissableProgressDialog() {
+        loading.setVisibility(View.INVISIBLE);
+    }
+
 }

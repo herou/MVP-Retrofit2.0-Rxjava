@@ -19,40 +19,27 @@ public class LoginPresenterImpl implements LoginPresenter,LoginModel.OnLoginFini
         if(username.equalsIgnoreCase("") || password.equalsIgnoreCase("")){
             login.showCheckFields();
         }else{
+            login.showProgressDialog();
             loginModel.login(username,password,this);
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        if(login != null){
-            login = null;
-        }
-    }
-
-    @Override
-    public void onSuccess() {
-        login.showLoggednSuccessfully();
-    }
-
-    @Override
-    public void onFailure() {
-        login.showTryAgain();
     }
 
 
     @Override
     public void checkUsernamePassword() {
+        login.dissableProgressDialog();
         login.showTryAgain();
     }
 
     @Override
     public void onError() {
+        login.dissableProgressDialog();
         login.showError();
     }
 
     @Override
     public void onSuccessfully() {
+        login.dissableProgressDialog();
         login.showLoggednSuccessfully();
     }
 }

@@ -6,7 +6,5 @@ package com.example.user.loginmvp;
 
 public interface LoginPresenter {
     void validateCred(String username,String password);
-    void onDestroy();
-    void onSuccess();
-    void onFailure();
+
 }
