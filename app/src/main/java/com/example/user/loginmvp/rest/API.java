@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import rx.Observable;
 
 /**
  * Created by Aron on 5/21/2016.
@@ -19,7 +20,7 @@ public interface API {
 
     @Headers("Content-Type: application/json")
     @POST("api.php")
-    Call<JsonObject> login(@Body Login_Model req);
+    Observable<JsonObject> login(@Body Login_Model req);
 
 
 

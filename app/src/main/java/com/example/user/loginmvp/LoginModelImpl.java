@@ -1,17 +1,17 @@
 package com.example.user.loginmvp;
 
-import android.widget.Toast;
+import android.util.Log;
+
 
 import com.example.user.loginmvp.rest.API;
 import com.example.user.loginmvp.rest.APIClient;
 import com.google.gson.JsonObject;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -30,42 +30,35 @@ public class LoginModelImpl implements LoginModel{
 
             login  = new Login_Model();
 
-
             login.setAction("");
             login.setUsername("");
             login.setPassword("");
-
 
             login.setAction("login_utente");
             login.setUsername(username);
             login.setPassword(password);
 
-
-            Call<JsonObject> userCallbackCall = apiService.login(login);
-            userCallbackCall.enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.body().toString());
-                        String status = jsonObject.getString("status");
-                        if(!status.equalsIgnoreCase("error")){
-                            onLoginFinishedListener.onSuccessfully();
-                        }else{
-                            onLoginFinishedListener.checkUsernamePassword();
-                        }
-
-                    } catch (JSONException e) {
-                        onLoginFinishedListener.onError();
-                        e.printStackTrace();
+            apiService.login(login)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<JsonObject>() {
+                    @Override
+                    public void onCompleted() {
+                      //
                     }
 
-                }
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-                    onLoginFinishedListener.onError();
-                }
-            });
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("Problem : ", e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(JsonObject jsonObject) {
+                        String response = jsonObject.get("status").toString();
+                        onLoginFinishedListener.onResponse(response);
+                    }
+                });
+
         }
 
 }

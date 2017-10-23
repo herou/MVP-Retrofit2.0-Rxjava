@@ -1,5 +1,6 @@
 package com.example.user.loginmvp;
 
+
 /**
  * Created by user on 10/16/2017.
  */
@@ -20,7 +21,9 @@ public class LoginPresenterImpl implements LoginPresenter,LoginModel.OnLoginFini
             login.showCheckFields();
         }else{
             login.showProgressDialog();
+
             loginModel.login(username,password,this);
+
         }
     }
 
@@ -32,14 +35,17 @@ public class LoginPresenterImpl implements LoginPresenter,LoginModel.OnLoginFini
     }
 
     @Override
-    public void onError() {
-        login.dissableProgressDialog();
-        login.showError();
+    public void onResponse(String response) {
+        if(response.equalsIgnoreCase("\"success\"")){
+            login.dissableProgressDialog();
+            login.showLoggednSuccessfully();
+
+        }else if(response.equalsIgnoreCase( "\"error\"")){
+            login.dissableProgressDialog();
+            login.showError();
+
+        }
+
     }
 
-    @Override
-    public void onSuccessfully() {
-        login.dissableProgressDialog();
-        login.showLoggednSuccessfully();
-    }
 }

@@ -9,8 +9,7 @@ public interface LoginModel {
 
     interface OnLoginFinishedListener{
         void checkUsernamePassword();
-        void onError();
-        void onSuccessfully();
+        void onResponse(String response);
     }
     void login(String username,String password,OnLoginFinishedListener onLoginFinishedListener);
 }

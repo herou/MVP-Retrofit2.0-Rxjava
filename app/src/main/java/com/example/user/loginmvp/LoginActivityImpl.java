@@ -55,19 +55,9 @@ public class LoginActivityImpl extends AppCompatActivity implements Login{
 
     @Override
     public void showError() {
-        Toast.makeText(getApplicationContext(),"Happend and error,try again later!",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Try again!",Toast.LENGTH_LONG).show();
     }
 
-    /*@Override
-    public void login(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginPresenterImpl.validateCred(username.getText().toString(),password.getText().toString());
-            }
-        });
-    }
-*/
     @Override
     public void showProgressDialog() {
         loading.setVisibility(View.VISIBLE);
