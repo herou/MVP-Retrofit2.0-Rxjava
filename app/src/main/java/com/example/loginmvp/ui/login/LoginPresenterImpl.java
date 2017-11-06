@@ -40,6 +40,7 @@ public class LoginPresenterImpl implements LoginPresenter {
                         public void onCompleted() {
                             //
                         }
+
                         @Override
                         public void onError(Throwable e) {
                             Log.e("Problem : ", e.getMessage());
