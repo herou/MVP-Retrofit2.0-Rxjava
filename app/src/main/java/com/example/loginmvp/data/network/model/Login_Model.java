@@ -1,4 +1,4 @@
-package com.example.user.loginmvp;
+package com.example.loginmvp.data.network.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

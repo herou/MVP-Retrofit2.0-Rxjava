@@ -1,4 +1,4 @@
-package com.example.user.loginmvp;
+package com.example.loginmvp;
 
 import org.junit.Test;
 

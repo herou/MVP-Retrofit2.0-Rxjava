@@ -1,16 +1,16 @@
-package com.example.user.loginmvp;
+package com.example.loginmvp.ui.login;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class LoginActivityImpl extends AppCompatActivity implements Login{
+import com.example.loginmvp.R;
+
+public class LoginActivityImpl extends AppCompatActivity implements Login {
 
     EditText username;
     EditText password;
@@ -52,11 +52,7 @@ public class LoginActivityImpl extends AppCompatActivity implements Login{
     public void showTryAgain() {
         Toast.makeText(getApplicationContext(),"Try again,username and password are incorrect!",Toast.LENGTH_LONG).show();
     }
-
-    @Override
-    public void showError() {
-        Toast.makeText(getApplicationContext(),"Try again!",Toast.LENGTH_LONG).show();
-    }
+    
 
     @Override
     public void showProgressDialog() {

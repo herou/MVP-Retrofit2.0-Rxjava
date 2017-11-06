@@ -1,9 +1,8 @@
-package com.example.user.loginmvp.rest;
+package com.example.loginmvp.data.network.model;
 
-import com.example.user.loginmvp.Login_Model;
+import com.example.loginmvp.data.network.model.Login_Model;
 import com.google.gson.JsonObject;
 
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;

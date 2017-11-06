@@ -1,4 +1,4 @@
-package com.example.user.loginmvp.rest;
+package com.example.loginmvp.data.network.model;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -11,8 +11,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.user.loginmvp.rest.API.BASE_URL;
-import static com.example.user.loginmvp.rest.API.BASE_URL_LOGIN_PAGES;
+import static com.example.loginmvp.data.network.model.API.BASE_URL;
+import static com.example.loginmvp.data.network.model.API.BASE_URL_LOGIN_PAGES;
 
 /**
  * Created by Eraldi on 12/16/2016.
