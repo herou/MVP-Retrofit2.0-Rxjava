@@ -18,12 +18,13 @@ public class LoginActivityImpl extends AppCompatActivity implements Login {
     LoginPresenterImpl loginPresenterImpl;
     ProgressBar loading;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginPresenterImpl = new LoginPresenterImpl(this);
+        loginPresenterImpl = new LoginPresenterImpl(this,getApplicationContext());
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         loading = (ProgressBar) findViewById(R.id.loading);

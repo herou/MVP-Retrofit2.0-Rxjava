@@ -1,8 +1,10 @@
 package com.example.loginmvp.ui.login;
 
 
+import android.content.Context;
 import android.util.Log;
 
+import com.example.loginmvp.data.DataManager;
 import com.example.loginmvp.data.network.ApiHelper;
 import com.example.loginmvp.data.network.AppApiHelper;
 
@@ -19,11 +21,13 @@ import rx.schedulers.Schedulers;
 public class LoginPresenterImpl implements LoginPresenter {
 
     Login loginView;
-    ApiHelper apiHelper;
+    Context context;
+    DataManager dataManager;
 
-    public LoginPresenterImpl(Login login) {
+    public LoginPresenterImpl(Login login, Context context) {
         this.loginView = login;
-        apiHelper = new AppApiHelper();
+        this.context = context;
+        dataManager = new DataManager(context);
     }
     @Override
     public void validateCred(String username, String password) {
@@ -32,13 +36,14 @@ public class LoginPresenterImpl implements LoginPresenter {
         }else {
             loginView.showProgressDialog();
 
-            apiHelper.login(username, password)
+            dataManager.login(username, password)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<JsonObject>() {
                         @Override
                         public void onCompleted() {
                             //
+                            Log.d("","");
                         }
 
                         @Override
